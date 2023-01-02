@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sesion O8 Servive Motor</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+    <!-- Naavbar Strat -->
+    <div class="FContainer">
+        <nav class="wrapper">
+            <div class="brand">
+                <div class="firsname">Website Service Motor</div>
+            </div>
+        </nav>
+        <div class="containers">
+        <div id="nav">
+        <br>
+        <div id = "dt"></div>
+        <script>
+            var date = new Date("2022-12-15");
+            document.getElementById("dt").innerHTML 
+            = date.toDateString();
+            </script>
+        <p>
+        <b style="text-align: center;">Wellcome</b>
+        <br>
+        <a href="UTS Praktikum Web.html"><img src="kisspng-custom-motorcycle-logo-ktm-automobile-repair-shop-5b37ce03b20648.8115312915303838757292.png" style="width:50%"></a>
+        <hr>
+        <br>
+        <i>
+            Selamat Datang di Pelayanan Service Motor
+        </p>
+    </div>
+        <br>
+        <br>
+        <center>
+    <h1> # Data Klien Service Motor # </h1>
+        </center>
+        <br>
+    <div class="tengah">
+    <button><a href="form_tambah.php">Tambah Data klien</button>
+    </div>
+    <br>
+    <center>
+    <table border="2" align="center">
+        <tr bgcolor="black">
+            <th>No</th>
+            <th>Nama</th>
+            <th>No Kendaraan</th>
+            <th>Keluhan</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+        </tr>
+        <?php
+        include "koneksi.php";
+
+        $no = 1;
+        $data = mysqli_query($koneksi, "SELECT * FROM service_motor");
+        while ($hasil = mysqli_fetch_array($data)) {
+        ?>
+
+            <tr>
+                <td><?php echo $no++; ?></td>
+                <td><?php echo $hasil['Nama']; ?></td>
+                <td><?php echo $hasil['No_Kendaraan']; ?></td>
+                <td><?php echo $hasil['Keluhan']; ?></td>
+                <td><?php echo $hasil['Tanggal']; ?></td>
+                <td>
+                    <a href="ubah.php?id=<?php echo $hasil['Nama'] ?>">Ubah</a> ||
+                    <a onclick="return confirm('apakah anda yakin ingin menghapusnya')" href="hapus.php?id=<?php echo $hasil['Nama'] ?>">Hapus</a>
+                </td>
+            </tr>
+        <?php
+        }
+        ?>
+    </table>
+    </center>
+
+</body>
+
+</html>
